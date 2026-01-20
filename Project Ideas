@@ -1,2 +1,5 @@
-1. Research an LLM that is used for insurance claims, and determine which covariates are significant in terms of deciding whether an individual is 
-   applicable for an insurance or not. Could be through looking at already existing LLM, and testing them on randomly generated individuals.
+1. Insurance claims - Research an LLM that is used for insurance claims, and determine which covariates are significant in terms of deciding whether an individual
+   is applicable for an insurance or not. Could be through looking at already existing LLM, and testing them on randomly generated individuals.
+1.1 Given a list of policies and a couple of different insurance claims by different individuals (could use real client data, or fake client data made for
+    this experiment only), when asked to approve or reject the claims, does it follow or violate any policy? Would changing the prompt of the policies change the
+    output (approve or reject) to be more correct or incorrect according to the policy?
