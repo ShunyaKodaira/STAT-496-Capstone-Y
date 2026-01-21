@@ -1,7 +1,11 @@
-1. Insurance claims - Research an LLM that is used for insurance claims, and determine which covariates are significant in terms of deciding whether an individual
-   is applicable for an insurance or not. Could be through looking at already existing LLM, and testing them on randomly generated individuals.
-1.1 Given a list of policies and a couple of different insurance claims by different individuals (could use real client data, or fake client data made for
-    this experiment only), when asked to approve or reject the claims, does it follow or violate any policy? Would changing the prompt of the policies change the
-    output (approve or reject) to be more correct or incorrect according to the policy?
-1.2 Test the fairness of LLM decisions by systematically varying protected attributes (name, gender, socioeconomic indicators) 
-    while holding all policy relevant information constant.
+1. Insurance Claims
+1.1 Policy compliance and prompt sensitivity (accuracy-focused)
+    When an LLM is asked to approve or reject an insurance claim, does it correctly follow the written policy, and how sensitive is its decision to the way
+    the policy is presented in the prompt?
+1.2 Fairness audit under controlled counterfactuals (bias-focused)
+    If two individuals submit identical insurance claims, do protected attributes (such as name, gender, or socioeconomic indicators) influence the model’s 
+    approval decision, justification, or the level of scrutiny applied?
+2. Video Summary Models
+   How accurate and robust are LLM-generated video summaries, and how sensitive are they to transcript quality?
+3. Auto Grader
+   Are LLM-based grading systems consistent and fair when evaluating student responses?
