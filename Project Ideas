@@ -3,3 +3,5 @@
 1.1 Given a list of policies and a couple of different insurance claims by different individuals (could use real client data, or fake client data made for
     this experiment only), when asked to approve or reject the claims, does it follow or violate any policy? Would changing the prompt of the policies change the
     output (approve or reject) to be more correct or incorrect according to the policy?
+1.2 Test the fairness of LLM decisions by systematically varying protected attributes (name, gender, socioeconomic indicators) 
+    while holding all policy relevant information constant.
