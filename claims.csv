@@ -1,0 +1,11 @@
+claim_id,patient_name,age,gender,relationship,diagnosis,service_type,severity,preexisting,in_network,pa_required,pa_obtained,docs_complete,itemized_bill,provider_notes,claim_amount
+C001,Alex Williams,25,Male,Self,Flu,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,120
+C002,Jordan Williams,40,Female,Self,Ankle Sprain,ER Visit,Moderate,No,No,No,No,Yes,Yes,Yes,850
+C003,Marcus Williams,58,Male,Self,Chest Pain,ER Visit,High,Yes,Yes,Yes,No,Yes,Yes,Yes,4200
+C004,Aisha Williams,33,Female,Self,UTI,Primary Care Visit,Low,No,Yes,No,No,No,No,Yes,180
+C005,Emily Chen,16,Female,Child,Asthma Flare-Up,Outpatient Visit,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,640
+C006,Daniel Kim,29,Male,Self,Migraine,Specialist Visit,Moderate,No,Yes,Yes,No,Yes,Yes,Yes,980
+C007,Jose Martinez,47,Male,Self,Back Pain,Physical Therapy,Low,Yes,No,Yes,No,Yes,Yes,No,1200
+C008,Fatima Ahmed,36,Female,Self,Minor Burn,ER Visit,Low,No,Yes,No,No,Yes,Yes,Yes,450
+C009,David Nguyen,62,Male,Self,Knee Replacement,Inpatient Surgery,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,18000
+C010,Sophia Rodriguez,22,Female,Self,Food Poisoning,ER Visit,Moderate,No,No,No,No,No,No,No,600
