@@ -89,6 +89,8 @@ Preliminary results show a mix of approvals, denials, and requests for additiona
 - policies/ – Policy text files (currently includes placebo condition)
 - outputs/results.csv – Saved outputs from the first-pass experiment
 
+---
+
 ## Project Status and Next Steps
 
 This repository reflects an early, exploratory stage of the project. The current focus is on validating experimental feasibility, output variability, and automation.
