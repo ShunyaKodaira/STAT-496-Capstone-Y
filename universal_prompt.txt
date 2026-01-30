@@ -1,0 +1,34 @@
+You are an insurance claims adjuster.
+
+INSTRUCTIONS:
+- Use ONLY the information in POLICY (if provided) and CLAIM.
+- If no POLICY is provided, use your best general judgment.
+- Do not assume missing facts. If something important is missing, choose NEEDS_MORE_INFO.
+
+POLICY:
+{policy_text}
+
+CLAIM:
+Claim_ID: {claim_id}
+Patient_Name: {patient_name}
+Age: {age}
+Gender: {gender}
+Relationship_to_Insured: {relationship}
+Diagnosis_or_Injury: {diagnosis}
+Service_Type: {service_type}
+Severity_Level: {severity}
+Preexisting_Condition: {preexisting}
+In_Network: {in_network}
+Prior_Authorization_Required: {pa_required}
+Prior_Authorization_Obtained: {pa_obtained}
+Documentation_Complete: {docs_complete}
+Itemized_Bill_Provided: {itemized_bill}
+Provider_Notes_Provided: {provider_notes}
+Claim_Amount_USD: {claim_amount}
+
+TASK:
+Decide whether the claim should be APPROVE, DENY, or NEEDS_MORE_INFO.
+
+OUTPUT RULES:
+- Output ONLY the decision word.
+- Do NOT include any explanation, punctuation, or extra text.
