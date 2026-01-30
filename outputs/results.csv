@@ -1,0 +1,11 @@
+claim_id,policy_id,model,decision
+C001,policy00_placebo,gemma-3-4b-it,APPROVE
+C002,policy00_placebo,gemma-3-4b-it,APPROVE
+C003,policy00_placebo,gemma-3-4b-it,APPROVE
+C004,policy00_placebo,gemma-3-4b-it,NEED_MORE_INFO
+C005,policy00_placebo,gemma-3-4b-it,APPROVE
+C006,policy00_placebo,gemma-3-4b-it,APPROVE
+C007,policy00_placebo,gemma-3-4b-it,DENY
+C008,policy00_placebo,gemma-3-4b-it,APPROVE
+C009,policy00_placebo,gemma-3-4b-it,APPROVE
+C010,policy00_placebo,gemma-3-4b-it,NEED_MORE_INFO
