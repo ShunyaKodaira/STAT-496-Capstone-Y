@@ -9,3 +9,93 @@ C007,Jose Martinez,47,Male,Self,Back Pain,Physical Therapy,Low,Yes,No,Yes,No,Yes
 C008,Fatima Ahmed,36,Female,Self,Minor Burn,ER Visit,Low,No,Yes,No,No,Yes,Yes,Yes,450
 C009,David Nguyen,62,Male,Self,Knee Replacement,Inpatient Surgery,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,18000
 C010,Sophia Rodriguez,22,Female,Self,Food Poisoning,ER Visit,Moderate,No,No,No,No,No,No,No,600
+C011,Liam Smith,31,Male,Self,Strep Throat,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,145
+C012,Olivia Brown,8,Female,Child,Ear Infection,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,130
+C013,Noah Wilson,45,Male,Self,Kidney Stones,ER Visit,High,No,Yes,No,No,Yes,Yes,Yes,3200
+C014,Ava Garcia,27,Female,Self,Anxiety,Specialist Visit,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,250
+C015,Ethan Taylor,55,Male,Self,Cataract Surgery,Outpatient Surgery,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,4500
+C016,Isabella Moore,12,Female,Child,Broken Arm,ER Visit,Moderate,No,No,No,No,Yes,Yes,Yes,1850
+C017,Lucas Anderson,68,Male,Self,Hip Replacement,Inpatient Surgery,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,22000
+C018,Mia Thomas,34,Female,Self,Bronchitis,Urgent Care,Moderate,No,Yes,No,No,Yes,Yes,Yes,310
+C019,Benjamin Jackson,21,Male,Self,Concussion,ER Visit,Moderate,No,Yes,No,No,No,Yes,No,1100
+C020,Charlotte White,52,Female,Self,Type 2 Diabetes,Specialist Visit,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,210
+C021,Henry Harris,40,Male,Self,Sinusitis,Primary Care Visit,Low,No,No,No,No,Yes,No,Yes,165
+C022,Amelia Martin,29,Female,Self,Pregnancy Checkup,OBGYN Visit,Low,No,Yes,No,No,Yes,Yes,Yes,200
+C023,Alexander Thompson,63,Male,Self,Hypertension,Specialist Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,180
+C024,Evelyn Garcia,5,Female,Child,Tonsillitis,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,115
+C025,Sebastian Martinez,38,Male,Self,Herniated Disc,Physical Therapy,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,1400
+C026,Harper Robinson,44,Female,Self,Gallstones,ER Visit,High,No,Yes,No,No,Yes,Yes,Yes,4800
+C027,Jack Clark,33,Male,Self,ACL Tear,Outpatient Surgery,High,No,Yes,Yes,Yes,Yes,Yes,Yes,7200
+C028,Sofia Lewis,19,Female,Self,Acne,Specialist Visit,Low,No,Yes,No,No,Yes,Yes,Yes,150
+C029,Daniel Lee,59,Male,Self,Sleep Apnea,Sleep Study,Moderate,Yes,No,Yes,No,Yes,Yes,Yes,2800
+C030,Grace Walker,47,Female,Self,Menopause,Specialist Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,225
+C031,Samuel Hall,36,Male,Self,Food Allergy,ER Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,950
+C032,Chloe Allen,24,Female,Self,Skin Rash,Specialist Visit,Low,No,Yes,No,No,No,No,No,140
+C033,Matthew Young,70,Male,Self,Pneumonia,Inpatient Stay,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,8500
+C034,Zoey Hernandez,14,Female,Child,Scoliosis,Specialist Visit,Low,Yes,Yes,Yes,Yes,Yes,Yes,Yes,350
+C035,David King,42,Male,Self,Burn (2nd Degree),Urgent Care,Moderate,No,Yes,No,No,Yes,Yes,Yes,520
+C036,Victoria Wright,30,Female,Self,Iron Deficiency,Blood Work,Low,No,Yes,No,No,Yes,Yes,Yes,275
+C037,Joseph Lopez,51,Male,Self,Gout,Primary Care Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,195
+C038,Lily Scott,10,Female,Child,Flu,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,110
+C039,Owen Green,65,Male,Self,Cataracts,Specialist Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,300
+C040,Nora Adams,26,Female,Self,Migraine,ER Visit,Moderate,No,No,No,No,Yes,Yes,Yes,890
+C041,Wyatt Baker,32,Male,Self,Kidney Stones,ER Visit,High,No,Yes,No,No,Yes,Yes,Yes,3400
+C042,Stella Nelson,41,Female,Self,Plantar Fasciitis,Physical Therapy,Low,No,Yes,Yes,Yes,Yes,Yes,Yes,150
+C043,Julian Hill,28,Male,Self,Appendicitis,Inpatient Surgery,High,No,Yes,Yes,Yes,Yes,Yes,Yes,15500
+C044,Natalie Ramirez,35,Female,Self,Thyroiditis,Specialist Visit,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,310
+C045,Levi Campbell,11,Male,Child,Asthma,Primary Care Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,125
+C046,Addison Mitchell,54,Female,Self,Glaucoma,Specialist Visit,Moderate,Yes,No,Yes,Yes,Yes,Yes,Yes,280
+C047,Asher Roberts,39,Male,Self,Laryngitis,Urgent Care,Low,No,Yes,No,No,Yes,Yes,Yes,190
+C048,Lucy Carter,61,Female,Self,Osteoporosis,Specialist Visit,Moderate,Yes,Yes,No,No,Yes,Yes,No,240
+C049,Leo Phillips,22,Male,Self,Mono,Primary Care Visit,Moderate,No,Yes,No,No,Yes,Yes,Yes,210
+C050,Paisley Evans,7,Female,Child,Pink Eye,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,95
+C051,Isaac Turner,48,Male,Self,Hernia Repair,Outpatient Surgery,Moderate,No,Yes,Yes,Yes,Yes,Yes,Yes,5800
+C052,Willow Torres,31,Female,Self,Endometriosis,Specialist Visit,Moderate,Yes,Yes,Yes,Yes,No,Yes,Yes,420
+C053,Graysen Parker,19,Male,Self,Wisdom Tooth,Dental Surgery,Moderate,No,No,Yes,Yes,Yes,Yes,Yes,2200
+C054,Naomi Collins,43,Female,Self,Anemia,Blood Work,Low,No,Yes,No,No,Yes,Yes,Yes,185
+C055,Ezra Edwards,66,Male,Self,Heart Arrythmia,Cardiology Visit,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,750
+C056,Elena Stewart,25,Female,Self,UTI,Urgent Care,Low,No,Yes,No,No,Yes,Yes,Yes,210
+C057,Charles Morris,57,Male,Self,Psoriasis,Specialist Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,290
+C058,Eliana Nguyen,33,Female,Self,Sinus Infection,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,140
+C059,Christopher Murphy,49,Male,Self,Sciatica,Physical Therapy,Moderate,Yes,No,Yes,No,Yes,Yes,Yes,1100
+C060,Hazel Rivera,15,Female,Child,Strep Throat,Primary Care Visit,Low,No,Yes,No,No,Yes,No,Yes,130
+C061,Theodore Cook,62,Male,Self,Colonoscopy,Outpatient Visit,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,2600
+C062,Quinn Rogers,29,Female,Self,Panic Attack,ER Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,1200
+C063,Andrew Morgan,37,Male,Self,Bronchitis,Primary Care Visit,Moderate,No,Yes,No,No,Yes,Yes,Yes,175
+C064,Aurora Peterson,4,Female,Child,Chicken Pox,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,105
+C065,Jace Cooper,53,Male,Self,Rotator Cuff Tear,Outpatient Surgery,High,No,Yes,Yes,Yes,Yes,Yes,Yes,8900
+C066,Serenity Reed,36,Female,Self,Fibroids,Specialist Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,380
+C067,Thomas Bailey,46,Male,Self,Kidney Infection,ER Visit,High,No,Yes,No,No,Yes,Yes,Yes,3100
+C068,Alice Bell,27,Female,Self,Eczema,Specialist Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,160
+C069,Josiah Gomez,18,Male,Self,Sports Injury,Physical Therapy,Moderate,No,Yes,Yes,Yes,Yes,Yes,No,950
+C070,Maria Kelly,55,Female,Self,Arthritis,Specialist Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,230
+C071,Adrian Ward,40,Male,Self,Gallstones,Inpatient Surgery,High,No,No,Yes,Yes,Yes,Yes,Yes,14200
+C072,Bella Cox,21,Female,Self,Dehydration,Urgent Care,Moderate,No,Yes,No,No,Yes,Yes,Yes,450
+C073,Eli Diaz,34,Male,Self,Shingles,Primary Care Visit,Moderate,No,Yes,No,No,Yes,Yes,Yes,195
+C074,Skylar Marshall,29,Female,Self,Depression,Specialist Visit,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,250
+C075,Jonathan Ortiz,68,Male,Self,COPD,Specialist Visit,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,420
+C076,Genesis Ramirez,12,Female,Child,Flu,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,115
+C077,Nolan Ross,44,Male,Self,Carpal Tunnel,Outpatient Surgery,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,3400
+C078,Madelyn Foster,33,Female,Self,Ovarian Cyst,Specialist Visit,Moderate,No,Yes,Yes,Yes,Yes,Yes,Yes,400
+C079,Hunter Powell,26,Male,Self,Food Poisoning,ER Visit,Moderate,No,No,No,No,Yes,No,Yes,850
+C080,Ariana Perry,50,Female,Self,Breast Biopsy,Outpatient Visit,Moderate,No,Yes,Yes,Yes,Yes,Yes,Yes,2100
+C081,Christian Butler,39,Male,Self,Diverticulitis,ER Visit,High,Yes,Yes,No,No,Yes,Yes,Yes,3800
+C082,Valentina Simmons,16,Female,Child,Acne,Specialist Visit,Low,No,Yes,No,No,No,No,No,140
+C083,Aaron Foster,60,Male,Self,Knee Meniscus,Outpatient Surgery,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,6200
+C084,Seraphina Henderson,31,Female,Self,Hyperthyroidism,Specialist Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,270
+C085,Jeremiah Coleman,47,Male,Self,Sleep Apnea,Sleep Study,Moderate,Yes,Yes,Yes,Yes,Yes,Yes,Yes,2500
+C086,Nevaeh Jenkins,9,Female,Child,Broken Leg,ER Visit,High,No,Yes,No,No,Yes,Yes,Yes,2900
+C087,Cameron Perry,24,Male,Self,Allergic Reaction,Urgent Care,Moderate,No,Yes,No,No,Yes,Yes,Yes,380
+C088,Gabriella Powell,38,Female,Self,Migraine,Specialist Visit,Moderate,Yes,Yes,No,No,Yes,Yes,Yes,220
+C089,Dominic Long,56,Male,Self,Prostate Exam,Specialist Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,350
+C090,Quinn Patterson,28,Female,Self,Tonsillitis,Outpatient Surgery,Moderate,No,Yes,Yes,Yes,Yes,Yes,Yes,4100
+C091,Austin Hughes,33,Male,Self,Tennis Elbow,Physical Therapy,Low,No,Yes,Yes,No,Yes,Yes,Yes,120
+C092,Everly Flores,19,Female,Self,Iron Deficiency,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,160
+C093,Adam Washington,64,Male,Self,Angina,ER Visit,High,Yes,Yes,No,No,Yes,Yes,Yes,4500
+C094,Athena Butler,42,Female,Self,Endometriosis,Specialist Visit,Moderate,Yes,No,Yes,Yes,Yes,Yes,Yes,440
+C095,Elias Simmons,30,Male,Self,Concussion,Specialist Visit,Moderate,No,Yes,No,No,Yes,Yes,Yes,310
+C096,Ivy Foster,52,Female,Self,High Cholesterol,Specialist Visit,Low,Yes,Yes,No,No,Yes,Yes,Yes,180
+C097,Roman Bryant,23,Male,Self,Ear Infection,Primary Care Visit,Low,No,Yes,No,No,Yes,Yes,Yes,125
+C098,Josephine Alexander,67,Female,Self,Hip Fracture,Inpatient Surgery,High,Yes,Yes,Yes,Yes,Yes,Yes,Yes,19500
+C099,Cooper Russell,35,Male,Self,Back Strain,Physical Therapy,Low,No,Yes,Yes,Yes,Yes,Yes,Yes,140
+C100,Sophie Griffin,21,Female,Self,Sinusitis,Urgent Care,Low,No,Yes,No,No,Yes,Yes,Yes,185
