@@ -4,8 +4,8 @@ from google import genai
 import pandas as pd
 
 # ---------- Files ----------
-CLAIMS_CSV = Path("claims.csv")
-PROMPT_TXT = Path("universal_prompt.txt")
+CLAIMS_CSV = Path("medical claims.csv")
+PROMPT_TXT = Path("universal_prompt_medical.txt")
 POLICY_DIR = Path("policies")
 OUTPUT_CSV = Path("outputs/results.csv")
 
