@@ -1,6 +1,7 @@
 import csv
 from pathlib import Path
 from google import genai
+import time
 import pandas as pd
 
 # ---------- Files ----------
