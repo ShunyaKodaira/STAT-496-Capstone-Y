@@ -100,3 +100,10 @@ Planned next steps include:
 - Expanding the dataset size,
 - Systematically varying protected attributes for fairness analysis,
 - Conducting regression analysis in R to compare decision patterns across conditions.
+
+---
+
+## Sources and Citations
+Our project is inspired by and developed from the following sources:
+- https://www.cbsnews.com/news/unitedhealth-lawsuit-ai-deny-claims-medicare-advantage-health-insurance-denials/
+- https://www.theguardian.com/us-news/2025/jan/25/health-insurers-ai
