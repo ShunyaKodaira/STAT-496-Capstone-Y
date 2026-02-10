@@ -83,6 +83,10 @@ def main():
                 row_dict = row.to_dict()
                 prompt = build_prompt(template, policy_text, row_dict)
 
+                # Pause for 2 seconds
+                # Prevents exceeding API rate limit
+                time.sleep(2)
+                
                 try:
                     response = client.models.generate_content(
                         model=MODEL,
