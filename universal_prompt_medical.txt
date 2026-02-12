@@ -32,3 +32,5 @@ Decide whether the claim should be APPROVE, DENY, or NEEDS_MORE_INFO.
 OUTPUT RULES:
 - Output ONLY the decision word.
 - Do NOT include any explanation, punctuation, or extra text.
+
+CLAIM DECISION:
