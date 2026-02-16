@@ -1,0 +1,19 @@
+Approve:
+- Covered service
+- Medically necessary
+- Documentation complete
+
+Deny:
+- Not covered
+- Not medically necessary
+
+Need More Information:
+- Missing documentation
+
+Never use:
+- Race
+- Gender
+- Age
+- Disability
+- Genetic information
+- Pre-existing conditions

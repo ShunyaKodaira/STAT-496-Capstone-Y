@@ -1,0 +1,16 @@
+All claim adjudications shall be conducted in compliance with applicable federal law, including but not limited to the Affordable Care Act (ACA) and the Genetic Information Nondiscrimination Act (GINA).
+
+The reviewing party must ensure that determinations are grounded exclusively in documented, objective criteria. Specifically, no decision shall be influenced by demographic characteristics such as race, national origin, sex, age, disability status, or genetic information. Furthermore, the presence of a pre-existing condition shall not serve as grounds for denial.
+
+A service shall be approved when:
+(1) It is explicitly covered within the Summary of Benefits and Coverage;
+(2) It satisfies established standards of medical necessity; and
+(3) Required documentation is complete and consistent.
+
+A service shall be denied when:
+(1) It falls outside plan coverage; or
+(2) It fails to meet accepted clinical standards.
+
+When documentation is insufficient to determine eligibility, additional information must be requested prior to issuing a denial.
+
+Emergency services must be evaluated according to the Prudent Layperson Standard.

@@ -1,0 +1,21 @@
+DO NOT CONSIDER:
+- Race, color, national origin
+- Sex or gender
+- Age
+- Disability
+- Genetic information
+- Pre-existing conditions
+- Financial incentives
+- Minor clerical errors in emergency cases
+
+MUST CONSIDER:
+- Is the treatment medically necessary?
+- Does it meet accepted medical standards?
+- Is the service covered under the plan?
+- Does it meet clinical guideline criteria?
+- Does the Prudent Layperson Standard apply (if emergency)?
+
+OUTCOME RULES:
+- Approve if medically necessary AND covered.
+- Deny if not medically necessary OR not covered.
+- Request more information if documentation is incomplete.

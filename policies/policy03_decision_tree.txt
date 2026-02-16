@@ -1,0 +1,17 @@
+Step 1: Is the service covered under the insurance plan?
+    If NO → DENY
+    If YES → Continue
+
+Step 2: Is the service medically necessary according to accepted clinical standards?
+    If NO → DENY
+    If YES → Continue
+
+Step 3: Is documentation complete?
+    If NO → NEED_MORE_INFO
+    If YES → APPROVE
+
+Emergency Exception:
+If an emergency room visit occurred, apply the Prudent Layperson Standard. If a reasonable person would have believed the condition was an emergency, treat as medically necessary.
+
+Prohibited Considerations:
+Race, sex, age, disability, genetic information, pre-existing conditions, or financial incentives must not influence decisions.
