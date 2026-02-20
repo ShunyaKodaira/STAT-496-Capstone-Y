@@ -1,0 +1,55 @@
+First:
+
+ Our main progress for this week was getting our results from the LLM, as well
+ as working on R code to analyze the results (through regression, etc.)
+
+ We asked the LLM (Gemma 3 4b, Gemma 3 12b, Gemma 3 27b) to analyze insurance 
+ claims under specific instructions and asked the LLM to determine if these 
+ claims should be accepted, denied, or needs further information.
+
+ The specific instructions are 
+  0. None
+  1. Prose
+  2. Bullets
+  3. Decision Tree
+  4. Bias emphasis
+  5. Minimal
+  6. Verbose
+ (Specifics on the instructions can be found on our policies folder)
+ https://github.com/ShunyaKodaira/STAT-496-Capstone-Y/tree/main/policies
+
+ Progress on some of the R analysis we plan to do can be found on the: Insurance Claims Analysis.R file
+ https://github.com/ShunyaKodaira/STAT-496-Capstone-Y/blob/main/Insurance%20Claims%20Analysis.R
+
+Second:
+
+ Introduction:
+
+ Experimental Design:
+  Our goal of the experiment is analyze the differences in results if we give the LLM specific instructions when making decisions.
+  Our plan is to have the LLM accept, deny, or determine state more information is needed for a patient's medical insurance.
+  Specifically, we will be testing this by giving the LLM the following,
+   - A dataset of medical claims (with covariates such as patient information, diagnosis, service type)
+   - A specific instruction format on how we want the LLM to determine insurance claims
+     - No extra instructions
+     - Written in an ordinary form (no metrical structure)
+     - Written in bullet points
+     - A decision tree for the LLM to follow
+     - Emphasis on Federal Law (Prohibition)
+     - A simple list
+     - Expressive language
+  The LLM used in this experiments use the following models: Gemma 3 4b, Gemma 3 12b, Gemma 3 27b
+
+  With all of this in mind, we ran a total of 21 experiments, where each model ran 7 each.
+  Each experiment consisted of 100 patient data.
+
+
+
+
+
+
+
+
+
+
+
