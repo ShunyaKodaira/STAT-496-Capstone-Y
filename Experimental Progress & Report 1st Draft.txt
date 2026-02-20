@@ -1,0 +1,115 @@
+# Progress Update
+
+Over the past week, we finalized the core LLM pipeline and generated structured decision outputs for 
+our insurance-claim screening experiment. We ran three models (Gemma 3 4B-it, 12B-it, and 27B-it) 
+across seven policy formatting conditions (placebo plus six structured formats: prose, bullet points, 
+decision tree, bias emphasis, minimal, and verbose). Each model evaluated 100 synthetic insurance 
+claims per condition, resulting in 21 total experimental runs and 2,100 model decisions. These outputs 
+are saved in 3 seperate CSV files and can be found in the repository under the outputs folder.
+
+We also began implementing statistical analysis in R (see Insurance Claims Analysis.R). Our current 
+analysis includes multinomial logistic regression models, likelihood ratio tests for interaction 
+effects between claimant features and policy formatting, instability metrics measuring decision flips 
+across formats, and preliminary fairness checks (e.g., approval rate by gender and other covariates). 
+While interpretation of results is still in progress, the analytical framework is now fully implemented 
+and ready for refinement.
+
+## Relevant materials:
+-	Policy files: /policies
+-	Output datasets: /outputs
+-	Analysis script: Insurance Claims Analysis.R
+-	Prompt template: universal_prompt.txt
+
+
+# Introduction
+
+Large language models are increasingly deployed in decision-support systems across domains such as 
+healthcare, finance, and insurance. While these systems are often presented as neutral and objective, 
+real-world reporting has raised concerns about automated decision pipelines influencing high-stakes 
+outcomes. For example, recent investigations have highlighted the use of algorithmic systems in health 
+insurance claim screening and alleged wrongful denials of care (CBS News, 2023; The Guardian, 2025). 
+These cases illustrate how automated systems can materially affect patient access to medical treatment 
+and financial stability.
+
+Beyond overt bias, an additional concern is decision instability: whether small variations in rule 
+presentation or language structure influence model outputs. Prior research on large language models 
+has demonstrated sensitivity to prompt phrasing and framing, suggesting that outputs may vary even when 
+the underlying task remains logically identical. If formatting alone alters decision patterns, this 
+raises questions about the reliability of LLMs in structured decision-making contexts.
+
+In this study, we investigate whether the formatting of insurance decision rules affects the behavior 
+of LLMs when screening medical claims. Rather than modifying the substantive content of policies, we 
+hold policy meaning constant while varying presentation style. We analyze whether formatting influences 
+overall approval rates, the relationship between claimant features and decisions, and the stability of 
+outcomes across conditions.
+
+
+# Experimental Design
+
+We constructed a synthetic dataset of 100 insurance claims inspired by real-world medical claim forms 
+(e.g., CMS-1500 structure). Each claim includes structured covariates such as:
+ - Name
+ -	Age
+ -	Gender
+ -	Relationship to insured
+ -	Diagnosis
+ -	Service type
+ -	Severity level
+ -	Preexisting condition status
+ -	In-network status
+ -	Prior authorization requirement and completion
+ -	Documentation completeness
+ -	Claim amount
+
+These variables were chosen to reflect factors commonly considered in insurance review.
+
+## Policy Conditions
+We designed seven policy conditions:
+	0.	Placebo (no policy instructions provided)
+	1.	Prose format
+	2.	Bullet-point format
+	3.	Decision tree format
+	4.	Bias-emphasis format (explicit non-discrimination emphasis)
+	5.	Minimal summary format
+	6.	Verbose, legally detailed format
+
+Each condition contains substantively identical approval criteria (medical necessity, coverage, 
+documentation requirements, etc.), differing only in presentation structure.
+
+## Prompting Procedure
+For each experiment, the LLM receives:
+ -	A structured claim description
+ -	A policy text corresponding to the condition (or blank for placebo)
+
+The model is instructed to return a single categorical decision:
+ -	APPROVE
+ -	DENY
+ -	NEED_MORE_INFO
+
+We restrict outputs to a single label to minimize variation due to explanatory text and simplify 
+statistical analysis.
+
+## Models and Trials
+We evaluate three models:
+ -	Gemma 3 4B-it
+ -	Gemma 3 12B-it
+ -	Gemma 3 27B-it
+
+Each model evaluates 100 claims under all 7 policy conditions, resulting in:
+
+  3 models × 7 conditions × 100 claims = 2,100 total model decisions.
+
+All experiments were run via the Gemini API using consistent prompting structure.
+
+## Analysis Plan
+We treat the model’s decision as a categorical response variable and conduct:
+ -	Multinomial logistic regression to estimate relationships between claimant features and decisions.
+ -	Likelihood ratio tests comparing models with and without policy-format interaction terms.
+ -	Instability analysis measuring how often decisions change across policy formats.
+ -	Fairness metrics examining whether demographic variables (e.g., gender) are associated with 
+differential approval rates, controlling for clinical variables.
+
+Our primary question is whether policy formatting significantly moderates the relationship between 
+claimant attributes and model decisions.
+
+
