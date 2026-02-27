@@ -8,11 +8,6 @@ results_4bit <- read.csv("results_4bit.csv")
 results_12bit <- read.csv("results_12bit.csv")
 results_27bit <- read.csv("results_27bit.csv")
 
-claims <- read.csv('/Users/ichaeyun/Library/Mobile Documents/com~apple~CloudDocs/UW Courses/UW 2025-26 Courses/UW 2026 Winter/STAT 496/Project/medical claims.csv')
-results_4bit <- read.csv('/Users/ichaeyun/Library/Mobile Documents/com~apple~CloudDocs/UW Courses/UW 2025-26 Courses/UW 2026 Winter/STAT 496/Project/outputs/results_4bit.csv')
-results_12bit <- read.csv('/Users/ichaeyun/Library/Mobile Documents/com~apple~CloudDocs/UW Courses/UW 2025-26 Courses/UW 2026 Winter/STAT 496/Project/outputs/results_12bit.csv')
-results_27bit <- read.csv('/Users/ichaeyun/Library/Mobile Documents/com~apple~CloudDocs/UW Courses/UW 2025-26 Courses/UW 2026 Winter/STAT 496/Project/outputs/results_27bit.csv')
-
 # Merge data
 results_all <- bind_rows(
   results_4bit,
