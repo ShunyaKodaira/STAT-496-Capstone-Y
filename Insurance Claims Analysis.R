@@ -204,3 +204,50 @@ model_no_interaction <- multinom(
 
 # ANOVA testing
 anova(model_no_interaction, model_interaction, test = "Chisq")
+
+
+# Stability Rate
+stability_metrics <- instability_model %>%
+  group_by(model) %>%
+  summarise(stability_rate = mean(n_unique == 1),
+            total_claims = n())
+print(stability_metrics)
+
+# Generalized Linear Models
+glm_direction <- glm(I(decision == "APPROVE") ~ policy_id + severity + claim_amount, 
+                     family = binomial, 
+                     data = analysis_data_4bit)
+summary(glm_direction)
+
+# Odds Ratio Table
+library(dplyr)
+library(purrr)
+library(broom)
+
+model_list <- list("4B"  = analysis_data_4bit,
+                   "12B" = analysis_data_12bit,
+                   "27B" = analysis_data_27bit)
+
+all_odds_ratios <- map_df(model_list, .id = "model_size", function(df) {
+  fit <- glm(I(decision == "APPROVE") ~ policy_id + severity + claim_amount, 
+             family = binomial, 
+             data = df)
+  
+  tidy(fit, conf.int = TRUE, exponentiate = TRUE) %>%
+    select(term, odds_ratio = estimate, p_value = p.value, conf.low, conf.high)
+})
+
+all_odds_ratios %>%
+  filter(term != "(Intercept)") %>%
+  arrange(term, model_size)
+
+
+
+
+
+
+
+
+
+
+
