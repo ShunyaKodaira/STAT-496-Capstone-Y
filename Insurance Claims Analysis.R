@@ -1,139 +1,347 @@
+# ============================================================
+# STAT 496 Capstone — Insurance Claims LLM Experiment
+# Analysis script
+#
+# Core questions:
+# (1) Does policy FORMAT change decision distributions?
+# (2) Is there evidence of demographic bias (gender) after controlling for claim factors?
+# (3) Does any gender effect differ by policy FORMAT (interaction)?
+# (4) Do results differ across MODEL sizes (4B vs 12B vs 27B)?
+# (Optional) How unstable are decisions across formats (flip rate)?
+# ============================================================
+
+# Required libraries
 library(dplyr)
 library(nnet)
+library(purrr)
+library(broom)
 
-# Might need to either put the datasets in the same folder as this R file,
+# -------------------------------------
+# 1) Load data and standardize columns
+# -------------------------------------
+# Note: Might need to either put the datasets in the same folder as this R file,
 # or put pathnames instead in the parentheses
-claims <- read.csv("medical claims.csv")
-results_4bit <- read.csv("results_4bit.csv")
-results_12bit <- read.csv("results_12bit.csv")
-results_27bit <- read.csv("results_27bit.csv")
+claims <- read.csv("medical claims.csv", stringsAsFactors = FALSE))
+results_4bit <- read.csv("results_4bit.csv", stringsAsFactors = FALSE))
+results_12bit <- read.csv("results_12bit.csv", stringsAsFactors = FALSE))
+results_27bit <- read.csv("results_27bit.csv", stringsAsFactors = FALSE))
 
-# Merge data
 results_all <- bind_rows(
   results_4bit,
   results_12bit,
   results_27bit
 )
 
-# For all modeels
+# Merge once
 full_data <- results_all %>%
   left_join(claims, by="claim_id")
 
-analysis_data <- full_data %>%
-  mutate(across(where(is.character), as.factor))
-
-# 4B
+# (Optional: per model)
 full_data_4bit <- results_4bit %>%
   left_join(claims, by = "claim_id")
 
+full_data_12bit <- results_12bit %>%
+  left_join(claims, by = "claim_id")
+
+full_data_27bit <- results_27bit %>%
+  left_join(claims, by = "claim_id")
+
+# -------------------------------------
+# 2) Type cleaning (factors vs numeric)
+# -------------------------------------
+analysis_data <- full_data %>%
+  mutate(across(where(is.character), as.factor))
+
+# (Optional: per model)
 analysis_data_4bit <- full_data_4bit %>%
   select(-model) %>%
   mutate(across(where(is.character), as.factor))
-
-# 12B
-full_data_12bit <- results_12bit %>%
-  left_join(claims, by = "claim_id")
 
 analysis_data_12bit <- full_data_12bit %>%
   select(-model) %>%
   mutate(across(where(is.character), as.factor))
 
-# 27B
-full_data_27bit <- results_27bit %>%
-  left_join(claims, by = "claim_id")
-
 analysis_data_27bit <- full_data_27bit %>%
   select(-model) %>%
   mutate(across(where(is.character), as.factor))
 
-# Inspect distributions
-table(analysis_data$model, analysis_data$decision)
-prop.table(table(analysis_data$model, analysis_data$decision))
+# Quick sanity checks: Inspect distributions (counts)
+  # Decision counts (overall):
+  table(analysis_data$decision)
 
-# Inspect distributions per prompt per model
+  # Decision counts by model:
+  table(analysis_data$model, analysis_data$decision)
+
+  # Decision counts by policy (all models pooled):
+  table(analysis_data$policy_id, analysis_data$decision)
+
+# Extra sanity checks (probability)
+  # Decision counts percentage (overall):
+  prop.table(table(analysis_data$decision))
+  
+  # Decision counts percentage by model:
+  prop.table(table(analysis_data$model, analysis_data$decision))
+  
+  # Decision counts percentage by policy (all models pooled):
+  prop.table(table(analysis_data$policy_id, analysis_data$decision))
+
+# Extra sanity checks 2: Inspect distributions per prompt per model
 table(analysis_data_4bit$policy_id, analysis_data_4bit$decision)
-prop.table(table(analysis_data_4bit$policy_id, analysis_data_4bit$decision))
-
 table(analysis_data_12bit$policy_id, analysis_data_12bit$decision)
-prop.table(table(analysis_data_12bit$policy_id, analysis_data_12bit$decision))
-
 table(analysis_data_27bit$policy_id, analysis_data_27bit$decision)
-prop.table(table(analysis_data_27bit$policy_id, analysis_data_27bit$decision))
 
-# Test If Decision Distribution Depends on Policy
+# ---------------------------------------------------------
+# 3) Helper: chi-square policy × decision per model
+# ---------------------------------------------------------
+# Test if decision depends on policy
   # H0: Decision independent of policy format
   # H1: Decision depends on policy format
-chisq.test(table(analysis_data_4bit$policy_id, analysis_data_4bit$decision))
-chisq.test(table(analysis_data_12bit$policy_id, analysis_data_12bit$decision))
-chisq.test(table(analysis_data_27bit$policy_id, analysis_data_27bit$decision))
+chisq_policy_by_model <- function(df) {
+  tab <- table(df$policy_id, df$decision)
+  out <- suppressWarnings(chisq.test(tab))
+  tibble(
+    statistic = unname(out$statistic),
+    df = unname(out$parameter),
+    p_value = out$p.value
+  )
+}
 
-# Test for Demographic Bias (Raw) (Gender version)
-chisq.test(table(analysis_data_4bit$gender, analysis_data_4bit$decision))
-
-# Logistic Regression (Adjusted Bias Test) (Gender version)
-glm_no_interaction <- glm(
-  I(decision == "APPROVE") ~ gender + age + severity + preexisting +
-    docs_complete + claim_amount + policy_id,
-  family = binomial,
-  data = analysis_data_4bit
-)
-
-# If gender coefficient significant -> evidence of differential approval odds
-summary(glm_no_interaction)
-exp(coef(glm_no_interaction))
-
-# Does Bias Change By Prompt? (Gender version)
-glm_interaction_gender <- glm(
-  I(decision == "APPROVE") ~ gender * policy_id +
-    age + severity + preexisting + docs_complete + claim_amount,
-  family = binomial,
-  data = analysis_data_4bit
-)
-
-anova(glm_no_interaction, glm_interaction_gender, test="Chisq")
-
-# Does Bias in Gender Change By Model?
-glm_model <- glm(
-  I(decision == "APPROVE") ~ gender + age + severity +
-    preexisting + docs_complete + claim_amount +
-    policy_id + model,
-  family = binomial,
-  data = analysis_data
-)
-
-glm_model_interaction <- glm(
-  I(decision == "APPROVE") ~ gender * model +
-    policy_id + age + severity + preexisting +
-    docs_complete + claim_amount,
-  family = binomial,
-  data = analysis_data
-)
-
-anova(glm_model, glm_model_interaction, test="Chisq")
-
-# Stability Analysis
-  # How many different decisions did it receive?
-instability_model <- analysis_data %>%
-  group_by(claim_id, model) %>%
-  summarise(n_unique = n_distinct(decision)) %>%
-  mutate(flipped = ifelse(n_unique > 1, 1, 0))
-
-# If high -> formatting creates instability.
-instability_model %>%
+# Chi-square test: policy_id × decision (per model)
+chisq_by_model <- analysis_data %>%
   group_by(model) %>%
-  summarise(flip_rate = mean(flipped))
+  group_modify(~ chisq_policy_by_model(.x)) %>%
+  ungroup()
 
-# Which types of claims are sensitive to formatting?
-instability_data <- analysis_data %>%
-  left_join(claims, by="claim_id")
+print(chisq_by_model)
+
+# ---------------------------------------------------------
+# 4) Main effect: does policy affect APPROVE rate?
+#    (Binary logistic regression; easy to interpret)
+# ---------------------------------------------------------
+analysis_data <- analysis_data %>%
+  mutate(approve = as.integer(decision == "APPROVE"))
+
+glm_policy_only <- glm(
+  approve ~ policy_id,
+  family = binomial,
+  data = analysis_data
+)
+
+# Logistic model: approve ~ policy_id (all models pooled)
+summary(glm_policy_only)
+
+# Odds ratios (APPROVE) by policy_id (vs baseline policy level):
+policy_or <- tidy(glm_policy_only, conf.int = TRUE, exponentiate = TRUE) %>%
+  filter(term != "(Intercept)") %>%
+  arrange(desc(estimate))
+
+print(policy_or)
+
+# -------------------------------------------------------------
+# 5) Adjusted bias test (gender), controlling for claim factors
+#    + policy main effect
+# -------------------------------------------------------------
+# Raw version (before adjusting)
+chisq.test(table(analysis_data$gender, analysis_data$decision))
+chisq.test(table(analysis_data_4bit$gender, analysis_data_4bit$decision))
+chisq.test(table(analysis_data_12bit$gender, analysis_data_12bit$decision))
+chisq.test(table(analysis_data_27bit$gender, analysis_data_27bit$decision))
+
+# Choose a small set of medically-relevant covariates to control
+# (keep this stable across all analyses)
+covars <- c("age", "severity", "preexisting",
+            "docs_complete", "claim_amount")
+
+# Build formula programmatically (prevents manual typing errors)
+f_bias <- as.formula(
+  paste("approve ~ gender + policy_id +", paste(covars, collapse = " + "))
+)
+
+# Adjusted version
+glm_bias <- glm(
+  f_bias,
+  family = binomial,
+  data = analysis_data
+)
+
+# Adjusted bias model: approve ~ gender + policy_id + covars (pooled)
+# (If gender coefficient significant -> evidence of differential approval odds)
+summary(glm_bias)
+
+# (Optional: per model)
+glm_bias_4b <- glm(
+  f_bias,
+  family = binomial,
+  data = analysis_data_4bit
+)
+
+glm_bias_12b <- glm(
+  f_bias,
+  family = binomial,
+  data = analysis_data_12bit
+)
+
+glm_bias_27b <- glm(
+  f_bias,
+  family = binomial,
+  data = analysis_data_27bit
+)
+
+summary(glm_bias_4b)
+summary(glm_bias_12b)
+summary(glm_bias_27b)
+
+# Gender odds ratio (Male vs baseline gender level):
+bias_or <- tidy(glm_bias, conf.int = TRUE, exponentiate = TRUE) %>%
+  filter(term %in% c("genderMale"))
+
+print(bias_or)
+
+# (Optional: per model)
+bias_or_4b <- tidy(glm_bias_4b, conf.int = TRUE, exponentiate = TRUE) %>%
+  filter(term %in% c("genderMale"))
+bias_or_12b <- tidy(glm_bias_12b, conf.int = TRUE, exponentiate = TRUE) %>%
+  filter(term %in% c("genderMale"))
+bias_or_27b <- tidy(glm_bias_27b, conf.int = TRUE, exponentiate = TRUE) %>%
+  filter(term %in% c("genderMale"))
+
+print(bias_or_4b)
+print(bias_or_12b)
+print(bias_or_27b)
+
+# ------------------------------------------------------------
+# 6) Does gender effect differ by policy format? (Interaction)
+# ------------------------------------------------------------
+f_int <- as.formula(
+  paste("approve ~ gender * policy_id +", paste(covars, collapse = " + "))
+)
+
+glm_bias_int <- glm(
+  f_int,
+  family = binomial,
+  data = analysis_data
+)
+
+# Interaction model: approve ~ gender*policy_id + covars (pooled)
+summary(glm_bias_int)
+
+#Likelihood ratio test: (no interaction) vs (gender*policy interaction)
+anova(glm_bias, glm_bias_int, test = "Chisq")
+
+# (Optional: per model)
+glm_bias_int_4b <- glm(
+  f_int,
+  family = binomial,
+  data = analysis_data_4bit
+)
+
+glm_bias_int_12b <- glm(
+  f_int,
+  family = binomial,
+  data = analysis_data_12bit
+)
+
+glm_bias_int_27b <- glm(
+  f_int,
+  family = binomial,
+  data = analysis_data_27bit
+)
+
+anova(glm_bias_4b, glm_bias_int_4b, test = "Chisq")
+anova(glm_bias_12b, glm_bias_int_12b, test = "Chisq")
+anova(glm_bias_27b, glm_bias_int_27b, test = "Chisq")
+
+# ----------------------------------------------------------------
+# 7) Cross-model comparison:
+#    Do models differ overall?
+#    Does policy effect differ by model?
+#    What about bias in gender by Model?
+# ----------------------------------------------------------------
+f_main <- as.formula(
+  paste("approve ~ policy_id + model + gender + ", paste(covars, collapse = " + "))
+)
+
+f_main_int <- as.formula(
+  paste("approve ~ policy_id * model + gender +", paste(covars, collapse = " + "))
+)
+
+f_gender_int <- as.formula(
+  paste("approve ~ gender * model + policy_id +", paste(covars, collapse = " + "))
+)
+
+glm_model_main <- glm(
+  f_main,
+  family = binomial,
+  data = analysis_data
+)
+
+glm_policy_model_int <- glm(
+  f_main_int,
+  family = binomial,
+  data = analysis_data
+)
+
+glm_gender_model_int <- glm(
+  f_gender_int,
+  family = binomial,
+  data = analysis_data
+)
+
+# Model main effects + policy main effects (pooled)
+summary(glm_model_main)
+
+# Does policy effect differ by model size? LRT: policy*model interaction
+anova(glm_model_main, glm_policy_model_int, test = "Chisq")
+
+# Does bias in gender change by model? LRT: gender*model interaction
+anova(glm_model_main, glm_gender_model_int, test="Chisq")
+
+# -----------------------------------------------------------------------
+# 8) Optional: instability across formats (flip rate)
+#    For each (claim_id, model), did the decision change across policies?
+# -----------------------------------------------------------------------
+# How many different decisions did it receive?
+instability <- analysis_data %>%
+  group_by(model, claim_id) %>%
+  summarise(n_unique = n_distinct(decision), .groups = "drop") %>%
+  mutate(flipped = as.integer(n_unique > 1))
+
+flip_rates <- instability %>%
+  group_by(model) %>%
+  summarise(
+    flip_rate = mean(flipped),
+    n_claims = n(),
+    .groups = "drop"
+  )
+
+# Instability (flip rate across policies), by model:
+  # If high -> formatting creates instability.
+print(flip_rates)
+
+# Optional: what claim features predict instability?
+# (Uses one row per claim_id per model)
+instability_with_claims <- instability %>%
+  left_join(claims, by = "claim_id") %>%
+  mutate(
+    across(any_of(numeric_cols), as.numeric),
+    across(where(is.character), as.factor)
+  )
+
+f_flip <- as.formula(
+  paste("flipped ~ model + gender + ", paste(covars, collapse = " + "))
+)
 
 glm_flip <- glm(
-  flipped ~ gender + severity + age + model,
+  f_flip,
   family = binomial,
-  data = instability_data
+  data = instability_with_claims
 )
 
 summary(glm_flip)
+
+# ------------------------------------------
+# Extra (feel free to play around
+# ------------------------------------------
 
 # Fairness Metrics
 approval_gender <- analysis_data %>%
@@ -220,10 +428,6 @@ glm_direction <- glm(I(decision == "APPROVE") ~ policy_id + severity + claim_amo
 summary(glm_direction)
 
 # Odds Ratio Table
-library(dplyr)
-library(purrr)
-library(broom)
-
 model_list <- list("4B"  = analysis_data_4bit,
                    "12B" = analysis_data_12bit,
                    "27B" = analysis_data_27bit)
