@@ -169,6 +169,15 @@ glm_bias <- glm(
 summary(glm_bias)
 
 # (Optional: per model)
+analysis_data_4bit <- analysis_data_4bit %>%
+  mutate(approve = as.integer(decision == "APPROVE"))
+
+analysis_data_12bit <- analysis_data_12bit %>%
+  mutate(approve = as.integer(decision == "APPROVE"))
+
+analysis_data_27bit <- analysis_data_27bit %>%
+  mutate(approve = as.integer(decision == "APPROVE"))
+
 glm_bias_4b <- glm(
   f_bias,
   family = binomial,
