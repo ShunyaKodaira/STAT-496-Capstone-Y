@@ -21,10 +21,10 @@ library(broom)
 # -------------------------------------
 # Note: Might need to either put the datasets in the same folder as this R file,
 # or put pathnames instead in the parentheses
-claims <- read.csv("medical claims.csv", stringsAsFactors = FALSE))
-results_4bit <- read.csv("results_4bit.csv", stringsAsFactors = FALSE))
-results_12bit <- read.csv("results_12bit.csv", stringsAsFactors = FALSE))
-results_27bit <- read.csv("results_27bit.csv", stringsAsFactors = FALSE))
+claims <- read.csv("medical claims.csv", stringsAsFactors = FALSE)
+results_4bit <- read.csv("results_4bit.csv", stringsAsFactors = FALSE)
+results_12bit <- read.csv("results_12bit.csv", stringsAsFactors = FALSE)
+results_27bit <- read.csv("results_27bit.csv", stringsAsFactors = FALSE)
 
 results_all <- bind_rows(
   results_4bit,
