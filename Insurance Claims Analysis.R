@@ -49,8 +49,14 @@ full_data_27bit <- results_27bit %>%
 # -------------------------------------
 # 2) Type cleaning (factors vs numeric)
 # -------------------------------------
+# Keep these numeric
+numeric_cols <- c("age", "claim_amount")
+
 analysis_data <- full_data %>%
-  mutate(across(where(is.character), as.factor))
+  mutate(
+    across(any_of(numeric_cols), as.numeric),
+    across(where(is.character), as.factor)
+  )
 
 # (Optional: per model)
 analysis_data_4bit <- full_data_4bit %>%
