@@ -107,3 +107,4 @@ Planned next steps include:
 Our project is inspired by and developed from the following sources:
 - https://www.cbsnews.com/news/unitedhealth-lawsuit-ai-deny-claims-medicare-advantage-health-insurance-denials/
 - https://www.theguardian.com/us-news/2025/jan/25/health-insurers-ai
+- https://arxiv.org/abs/2410.12405
