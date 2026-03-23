@@ -1,110 +1,158 @@
 ## Project Overview
 
-This repository contains a statistics capstone project exploring how large language models (LLMs) behave in structured decision-making tasks. The core goal of the project is to examine whether changes in how decision rules are written or formatted—rather than changes in their substantive content—can influence an LLM’s outputs.
+This repository contains a statistics capstone project investigating how large language models (LLMs) behave in structured decision-making environments. The central objective of this study is to evaluate whether non-substantive changes in policy presentation — such as formatting differences — can influence model decision outcomes.
 
-The project focuses on insurance claim screening as a motivating application, inspired by real-world concerns around fairness and bias in automated decision systems. Rather than assuming model outputs are stable, this work treats LLM behavior as something that can be experimentally probed and evaluated under controlled conditions.
+Using insurance claim screening as a motivating application, this project experimentally examines the stability, fairness, and consistency of LLM-generated decisions under controlled variations in prompt structure.
+
+Rather than assuming LLM outputs are stable or deterministic, this work treats model behavior as an empirical object of study.
 
 ---
 
 ## Motivation
 
-Large language models are increasingly used in decision-support contexts, yet small design choices—such as how rules are written—may introduce unintended instability or bias. This project aims to better understand those effects and contribute to more thoughtful and responsible use of LLMs in applied settings.
+LLMs are increasingly integrated into decision-support systems across domains such as healthcare administration, insurance adjudication, and automated risk assessment. However, concerns remain regarding:
+-	Decision instability
+-	Procedural fairness
+-	Sensitivity to prompt design
+-	Reliability in high-stakes contexts
+
+This project explores whether variations in how policies are presented — rather than what policies state — can lead to systematic differences in model decision behavior.
+
+Understanding these effects is essential for responsible deployment of LLM-based decision systems.
 
 ---
 
 ## Experiment Design
 
-We assume access to a dataset of insurance claims, where each record contains claimant attributes such as age, gender, injury description, and prior history. For each claim, an LLM is prompted to make a screening decision (approve, deny, or request additional information). This decision is stored as a new outcome variable.
+The experiment evaluates three model scales of Google’s Gemma 3 family:
+-	Gemma 3 4B-it
+-	Gemma 3 12B-it
+-	Gemma 3 27B-it
 
-The experiment consists of multiple conditions:
+Each model evaluates the same synthetic insurance claims dataset under seven policy presentation conditions:
 
-- **Baseline (Placebo):** The LLM receives no explicit insurance policies and must rely solely on its internal reasoning.
-- **Policy Conditions:** The LLM is provided with different versions of insurance policies that vary in presentation (e.g., reordered rules, bullet points vs. prose, simplified vs. detailed language) while keeping the underlying policy intent consistent.
+-	Placebo (no policy)
+-	Prose
+-	Bullet-point
+-	Decision tree
+-	Bias-emphasis
+-	Minimal
+-	Verbose
 
-For each condition, regression models are fit using the LLM’s decisions as the response variable and claimant attributes as predictors. By comparing coefficient estimates across conditions, we analyze:
-1. Which claimant attributes appear to influence the LLM’s decisions, and  
-2. Whether changes in policy formatting alter these relationships or overall decision patterns.
+Models are required to return a structured categorical output:
+-	APPROVE
+-	DENY
+-	NEED_MORE_INFO
 
-This approach prioritizes interpretability and controlled comparison over predictive performance.
+The full experiment consists of:
 
+**2,100 total evaluations**
+(3 models × 7 policy formats × 100 claims)
+
+This controlled design allows isolation of formatting effects while holding policy content constant.
+
+---
+
+## Analysis Approach
+
+Model outputs are analyzed using statistical methods including:
+- Logistic regression (policy effects on approval probability)
+- Multinomial outcome modeling
+- Decision stability metrics across prompt conditions
+- Contingency analysis (policy–decision dependence)
+- Adjusted fairness analysis controlling for claim attributes
+
+Key research questions include:
+- Does policy formatting influence decision outcomes?
+- Does model scale improve decision stability?
+- Which claim features drive model decisions?
+- Do formatting changes introduce demographic bias?
+  
 ---
 
 ## Technical Stack
 
-- **Python**: Interfacing with the LLM via API (Gemma 3 through the Gemini API)
-- **R**: Data cleaning, regression modeling, and result analysis
-- **LLM**: Google Gemma 3 (primarily 4B-it)
+- **Python**: LLM interaction and experimental automation
+- **R**: Statistical modeling and data analysis
+- **LLM**: Google Gemma 3 (4B-it, 12B-it, 27B-it)
 
-The pipeline is intentionally modular, separating model interaction from statistical analysis.
+The workflow separates inference generation from statistical evaluation to ensure reproducibility.
 
 ---
 
-## Data
+## Dataset
 
-- claims.csv contains a **synthetic insurance claims dataset** created for testing purposes.
-- The structure of the dataset is inspired by real-world insurance claim forms.
-- Variables include claimant demographics, diagnosis or injury type, service type, severity, network status, documentation completeness, and claim amount.
-- All records are fictitious and used solely to study LLM behavior.
+- medical claims.csv contains a **synthetic insurance claims dataset**
+- Designed to mimic real administrative claim structures
+- Includes variables such as:
+  - Demographics
+  - Diagnosis / injury description
+  - Severity
+  - Network status
+  - Documentation completeness
+  - Claim amount
+
+All records are fictitious and used solely for experimental analysis.
 
 ---
 
 ## Prompt Structure
 
-A single prompt template (universal_prompt.txt) is used across all experiments.
+A shared prompt template (universal_prompt.txt) is used across all conditions.
 
-Each prompt consists of:
-- A POLICY section (which may be empty in the placebo condition), and
-- A CLAIM section populated with variables from claims.csv.
+Each prompt includes:
+- POLICY section (varies by experimental condition)
+- CLAIM section populated from dataset
 
-The LLM is instructed to return only one decision label:
-- APPROVE
-- DENY
-- NEED_MORE_INFO
-
-Restricting outputs to a single categorical decision avoids noise from free-form explanations and simplifies downstream statistical analysis.
+Output restriction to categorical labels ensures:
+- Reduced response variability
+- Improved statistical interpretability
+- Consistent downstream modeling
 
 ---
 
-## First-Pass Experiment (Current Implementation)
+## Key Findings
 
-As an initial step, we implement a small-scale, first-pass experiment to verify that:
-1.	An LLM can be prompted with structured insurance claim information,
-2.	The model produces non-trivial and varied decision outputs, and
-3.	The experiment can be automated and scaled in later iterations.
+Major findings of the study include:
+- Policy formatting significantly affects approval outcomes
+- Larger models exhibit greater decision stability, but not perfectly
+- Administrative completeness signals dominate decision behavior
+- No significant adjusted demographic bias detected
+- Mid-scale models may exhibit unpredictable prompt sensitivity
 
-In the current implementation:
-- The placebo condition uses an empty policy file (policy00_placebo.txt).
-- Each claim is evaluated independently by the LLM.
-- Model decisions are saved to outputs/results.csv.
-
-Preliminary results show a mix of approvals, denials, and requests for additional information, indicating that the model is not producing uniform or degenerate outputs. This confirms that the experimental setup is suitable for further analysis and expansion.
+These results suggest that LLM decision systems require structured validation prior to deployment.
 
 ---
 
 ## Repository Contents
 
-- test.py – Python script that runs claims through the LLM and records decisions
-- claims.csv – Synthetic insurance claims dataset
+- test.py – LLM evaluation pipeline
+- medical claims.csv – Synthetic dataset
+- policies/ – Policy formatting variants
 - universal_prompt.txt – Shared prompt template
-- policies/ – Policy text files (currently includes placebo condition)
-- outputs/results.csv – Saved outputs from the first-pass experiment
+- outputs/ – Model decision results
+- Insurance Claims Analysis.R - Statistical modeling scripts
+- Final Report.pdf - Final capstone report
+- video2726191015.mp4 - Recorded presentation
 
 ---
 
-## Project Status and Next Steps
+## Research Implications
 
-This repository reflects an early, exploratory stage of the project. The current focus is on validating experimental feasibility, output variability, and automation.
+This work contributes to ongoing discussions regarding:
 
-Planned next steps include:
-- Adding multiple policy formats for comparison,
-- Expanding the dataset size,
-- Systematically varying protected attributes for fairness analysis,
-- Conducting regression analysis in R to compare decision patterns across conditions.
+- Prompt sensitivity in LLM decision pipelines
+- Reliability of AI-assisted administrative decision systems
+- Procedural fairness in automated screening environments
+- Model validation requirements for high-stakes applications
 
 ---
 
 ## Sources and Citations
-Our project is inspired by and developed from the following sources:
-- https://www.cbsnews.com/news/unitedhealth-lawsuit-ai-deny-claims-medicare-advantage-health-insurance-denials/
-- https://www.theguardian.com/us-news/2025/jan/25/health-insurers-ai
-- https://arxiv.org/abs/2410.12405
+The project is informed by research and reporting on AI deployment in insurance systems:
+- CBS News investigation on AI claim denials (https://www.cbsnews.com/news/unitedhealth-lawsuit-ai-deny-claims-medicare-advantage-health-insurance-denials/)
+- The Guardian reporting on insurer AI usage (https://www.theguardian.com/us-news/2025/jan/25/health-insurers-ai)
+- PROSA prompt sensitivity framework (https://arxiv.org/abs/2410.12405)
+- Gemma model documentation (https://deepmind.google/models/gemma/gemma-3/)
+
+Full citations are provided in the accompanying paper.
